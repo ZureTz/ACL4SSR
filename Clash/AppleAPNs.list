@@ -1,4 +1,5 @@
 # Apple Push Notifications
+DOMAIN,gsa.apple.com
 DOMAIN-SUFFIX,push.apple.com
 DOMAIN-SUFFIX,akadns.net
 DOMAIN-KEYWORD,apple.com.edgekey.net
