@@ -1,0 +1,16 @@
+# 内容：Tailscale
+# 数量：6条
+
+# Tailscale 官方服务
+DOMAIN-SUFFIX,tailscale.com
+DOMAIN-SUFFIX,tailscale.io
+
+# MagicDNS 设备域名
+DOMAIN-SUFFIX,ts.net
+
+# 路由自身 tailscaled 进程
+PROCESS-NAME,tailscaled
+
+# Tailscale IPv4 / IPv6 地址
+IP-CIDR,100.64.0.0/10,no-resolve
+IP-CIDR6,fd7a:115c:a1e0::/48,no-resolve
