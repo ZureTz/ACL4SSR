@@ -1,16 +1,45 @@
 # 内容：Apple 智能、Siri 与搜索
-# 来源：https://support.apple.com/en-us/101555
 # 核对日期：2026-11-10
-# 数量：6条
-# 应在通用 Apple 规则之前匹配；smoot 同时用于 Spotlight、Safari 等搜索服务。
+# 数量：11条（不含注释候选）
+# 官方基础：https://support.apple.com/en-us/101555
+# 社区补充：https://github.com/ddgksf2013/Filter/blob/master/AppleIntelligence.list
+# 交叉核对：https://github.com/v2fly/domain-list-community/blob/master/data/apple-intelligence
+# 交叉核对：https://github.com/SukkaW/Surge/blob/master/Source/non_ip/apple_intelligence.conf
+# 交叉核对：https://github.com/Accademia/Additional_Rule_For_Clash/blob/main/AppleAI/AppleAI.yaml
+# 论坛参考：https://linux.do/t/topic/2177833
+# 论坛参考：https://www.nodeseek.com/post-470569-1
+# 论坛参考：https://v2ex.com/t/1254528
+# 应在 Apple APNs IP 规则及通用 Apple 规则之前匹配。
+# 社区补充不是 Apple 官方必需清单；尚未在用户设备上验证。
 
 # Siri 与听写
-DOMAIN,guzzoni.apple.com
-# Siri、Spotlight 等搜索服务
+DOMAIN-SUFFIX,guzzoni.apple.com
+# Siri 新入口：ddgksf2013 2026-09-17 版本收录
+DOMAIN-SUFFIX,api-siri-prod.apple.com
+# 搜索：同时影响 Spotlight、Safari、News 等服务
 DOMAIN-SUFFIX,smoot.apple.com
 # 私有云计算（Private Cloud Compute）
-DOMAIN,apple-relay.cloudflare.com
-DOMAIN,apple-relay.fastly-edge.com
-DOMAIN,cp4.cloudflare.com
+DOMAIN-SUFFIX,apple-relay.cloudflare.com
+DOMAIN-SUFFIX,apple-relay.fastly-edge.com
+DOMAIN-SUFFIX,cp4.cloudflare.com
 # Apple 智能扩展
-DOMAIN,apple-relay.apple.com
+DOMAIN-SUFFIX,apple-relay.apple.com
+# 社区补充的中继域名
+DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net
+DOMAIN-SUFFIX,apple-relay.akamaized.net
+# 地区检测：也可能影响地图、eSIM、Apple Watch 及 Wi-Fi Calling 的地区判断
+# https://github.com/v2fly/domain-list-community/issues/2928
+DOMAIN-SUFFIX,gspe1-ssl.ls.apple.com
+# 兼容性补充：共享 CloudKit 网关，也承载 XProtect 更新和语音控制资源
+# ddgksf2013 与 Linux.do 收录；Accademia 则默认注释此项
+DOMAIN-SUFFIX,gateway.icloud.com
+
+# 以下是 V2EX 讨论中的排查候选，必要性尚不明确，默认不启用。
+# 部分发帖者即使添加这些域名仍然报错，应先结合连接日志确认。
+# DOMAIN,apple-carry-relay.cloudflare.com
+# DOMAIN,seed.siri.apple.com
+# DOMAIN,mask-api.icloud.com
+# DOMAIN,mask-api.fe2.apple-dns.net
+# DOMAIN,probe.icloud.com
+# DOMAIN,metrics.icloud.com
+# 不采用 siri 关键词、整个 apple.com / icloud.com / ls.apple.com 或 17.0.0.0/8 代理兜底。
