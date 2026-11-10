@@ -1,0 +1,16 @@
+# 内容：Apple 智能、Siri 与搜索
+# 来源：https://support.apple.com/en-us/101555
+# 核对日期：2026-11-10
+# 数量：6条
+# 应在通用 Apple 规则之前匹配；smoot 同时用于 Spotlight、Safari 等搜索服务。
+
+# Siri 与听写
+DOMAIN,guzzoni.apple.com
+# Siri、Spotlight 等搜索服务
+DOMAIN-SUFFIX,smoot.apple.com
+# 私有云计算（Private Cloud Compute）
+DOMAIN,apple-relay.cloudflare.com
+DOMAIN,apple-relay.fastly-edge.com
+DOMAIN,cp4.cloudflare.com
+# Apple 智能扩展
+DOMAIN,apple-relay.apple.com
