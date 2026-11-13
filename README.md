@@ -5,6 +5,47 @@
 * Telegram频道订阅地址：**[https://t.me/ACL4SSR](https://t.me/ACL4SSR)**
 * [关于中国的互联网](https://github.com/ACL4SSR/ACL4SSR/wiki/关于中国的互联网)
   
+## Shadowrocket 单节点配置
+
+[下载 ACL4SSR_Online_Full.conf](https://raw.githubusercontent.com/ZureTz/ACL4SSR/master/Shadowrocket/ACL4SSR_Online_Full.conf)
+（[查看配置](Shadowrocket/ACL4SSR_Online_Full.conf)）
+
+从 `Clash/config/ACL4SSR_Online_Full.ini` 转换，使用 `DIRECT`、`PROXY`、`REJECT` 三种策略，不包含节点凭据或代理组。`PROXY` 使用 Shadowrocket 首页当前选择的节点。
+
+| 策略 | 服务 |
+| --- | --- |
+| PROXY | 苹果服务、苹果 APNs、苹果智能、AI、Telegram、YouTube、Netflix、巴哈姆特、国外媒体、GFW 列表、未匹配流量 |
+| PROXY | Epic、Origin、Sony、Steam、Nintendo；原白名单内的 Epic / Origin 域名也通过代理放行 |
+| DIRECT | SteamCN、GoogleCN、局域网、Tailscale 域名与网段、国内域名与 IP、下载规则 |
+| DIRECT | 微软 Bing、OneDrive、微软服务、谷歌 FCM、网易音乐、哔哩哔哩、国内媒体 |
+| REJECT | 广告拦截、应用净化、秋风广告、anti-AD、EasyList、隐私防护 |
+
+使用方法：
+
+1. 在 Shadowrocket 的“配置”中添加上面的下载地址，下载并使用配置；也可以导入本地 `.conf` 文件。
+2. 首页选中自己的节点，将全局路由设为“配置”。
+3. 为使 APNs 流量进入隧道，在“设置 → 隧道”中开启“包括 APNs”；若不可选，按当前版本界面先启用“包括所有网络”。配置为仍支持旧选项的版本设置了 `bypass-system = false`。仅添加 APNs 代理规则不能保证系统推送已经进入隧道。
+4. 重新连接，在连接记录中确认苹果 / APNs / 游戏命中 `PROXY`、SteamCN 命中 `DIRECT`。已有模块可能覆盖本配置，排查时一并检查。
+
+SteamCN 的直连范围沿用原列表，包括 `steamcontent.com`、`steamusercontent.com`、`steamserver.net` 等，并不只限于下载。其他 Steam 流量走代理；流媒体地区访问能力仍取决于节点出口。
+
+兼容与更新：
+
+- 秋风规则使用其 Surge RULE-SET 格式。其他兼容列表继续在线引用，使用客户端的配置 / 规则集更新功能刷新；不照搬 subconverter 的 `86400` 参数。
+- Tailscale、OneDrive、国外媒体、Download 中的 `PROCESS-NAME` 已省略，其余规则作为配置内的快照保留；UnBan 也内联以修正 Epic / Origin 分流。更新这些源文件后需要重新生成并更新主配置。
+- 保留原有 URL 正则规则，但不启用 MITM 或安装证书；HTTPS 完整路径匹配效果需在客户端核实，不承诺与 Clash 完全一致。Tailscale 规则本身不会建立 Tailscale 隧道。
+- 配置生成与静态分流检查不代替 iOS 实机导入、APNs 收发和网络测试。
+
+维护命令（Python 3.9+，生成过程不需要联网）：
+
+```sh
+python3 scripts/generate_shadowrocket.py
+python3 scripts/generate_shadowrocket.py --check
+python3 -m unittest discover -s tests -p 'test_shadowrocket.py'
+```
+
+策略映射在生成脚本中维护；重新生成不会修改 Clash 配置。格式参考：[Shadowrocket 使用手册](https://github.com/LOWERTOP/Shadowrocket)、[秋风规则接入说明](https://github.com/AWAvenue/AWAvenueAdsWebSite/blob/main/ShadowRocket.md)。
+
 # 安卓 SSR 去广告ACL规则
   * 屏蔽小米手机和魅族flyme rom系统广告
   * 国内网站均直接连接
