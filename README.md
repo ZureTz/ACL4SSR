@@ -5,6 +5,10 @@
 * Telegram频道订阅地址：**[https://t.me/ACL4SSR](https://t.me/ACL4SSR)**
 * [关于中国的互联网](https://github.com/ACL4SSR/ACL4SSR/wiki/关于中国的互联网)
   
+## Online Full 延迟探针
+
+`Clash/config/ACL4SSR_Online_Full.ini` 的故障转移、自动选择和国家节点组使用 `https://cp.cloudflare.com/generate_204`。2026-11-14 从 gstatic 切换，原检测间隔与容差不变；这是代理 HTTP(S) 探测，不是 ICMP ping。Zashboard 若选择“面板控制”，还需在面板“设置 → 代理 → 延迟”使用相同地址；面板手动探针与内核策略组 URL 是两个配置来源。
+
 ## Shadowrocket 单节点配置
 
 [下载 ACL4SSR_Online_Full.conf](https://raw.githubusercontent.com/ZureTz/ACL4SSR/master/Shadowrocket/ACL4SSR_Online_Full.conf)
