@@ -16,7 +16,7 @@
 | --- | --- |
 | PROXY | 苹果服务、苹果 APNs、苹果智能、AI、Telegram、YouTube、Netflix、巴哈姆特、国外媒体、GFW 列表、未匹配流量 |
 | PROXY | Epic、Origin、Sony、Steam、Nintendo；原白名单内的 Epic / Origin 域名也通过代理放行 |
-| DIRECT | SteamCN、GoogleCN、局域网、Tailscale 域名与网段、国内域名与 IP、下载规则 |
+| DIRECT | 中国大陆 iCloud（`icloud.com.cn` 及子域名）、SteamCN、GoogleCN、局域网、Tailscale 域名与网段、国内域名与 IP、下载规则 |
 | DIRECT | 微软 Bing、OneDrive、微软服务、谷歌 FCM、网易音乐、哔哩哔哩、国内媒体 |
 | REJECT | 广告拦截、应用净化、秋风广告、anti-AD、EasyList、隐私防护 |
 
@@ -26,6 +26,8 @@
 2. 首页选中自己的节点，将全局路由设为“配置”。
 3. 为使 APNs 流量进入隧道，在“设置 → 隧道”中开启“包括 APNs”；若不可选，按当前版本界面先启用“包括所有网络”。配置为仍支持旧选项的版本设置了 `bypass-system = false`。仅添加 APNs 代理规则不能保证系统推送已经进入隧道。
 4. 重新连接，在连接记录中确认苹果 / APNs / 游戏命中 `PROXY`、SteamCN 命中 `DIRECT`。已有模块可能覆盖本配置，排查时一并检查。
+
+`icloud.com.cn` 及其子域名在 `Clash/UnBan.list` 中优先直连，早于通用 Apple 规则；Online Full 的 Clash 订阅和此 Shadowrocket 配置均包含此例外。`icloud.com` 和其他苹果服务保持原分流。更新订阅/配置后新连接生效，旧配置不会自动改写。
 
 SteamCN 的直连范围沿用原列表，包括 `steamcontent.com`、`steamusercontent.com`、`steamserver.net` 等，并不只限于下载。其他 Steam 流量走代理；流媒体地区访问能力仍取决于节点出口。
 
