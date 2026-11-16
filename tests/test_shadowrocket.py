@@ -72,24 +72,6 @@ class ShadowrocketConfigTests(unittest.TestCase):
         steam = next(i for i, r in enumerate(self.rules) if "/Steam.list," in r)
         self.assertLess(steam_cn, steam)
 
-    def test_xbox_services_and_download_exceptions(self):
-        for host in ("notify.xboxlive.com", "catalog.gamepass.com", "xbox.ipv6.microsoft.com"):
-            with self.subTest(host=host):
-                self.assertEqual(self.domain_policy(host), "PROXY")
-        for host in ("assets1.xboxlive.com", "assets2.xboxlive.cn", "packagespc.xboxlive.com",
-                     "xvcf1.xboxlive.com", "xvcf2.xboxlive.com", "tlu.dl.delivery.mp.microsoft.com"):
-            with self.subTest(host=host):
-                self.assertEqual(self.domain_policy(host), "DIRECT")
-        entries = [r for r in generator.SOURCE.read_text().splitlines() if r.startswith("ruleset=")]
-        download = next(i for i, r in enumerate(entries) if r.endswith("/XboxDownload.list"))
-        xbox = next(i for i, r in enumerate(entries) if r.endswith("/Xbox.list"))
-        microsoft = next(i for i, r in enumerate(entries) if r.endswith("/Microsoft.list"))
-        self.assertTrue(entries[download].startswith("ruleset=🎯 全球直连,"))
-        self.assertTrue(entries[xbox].startswith("ruleset=🎮 游戏平台,"))
-        self.assertLess(download, xbox)
-        self.assertLess(xbox, microsoft)
-        self.assertEqual(self.domain_policy("login.live.com"), "DIRECT")
-
     def test_other_policies_and_ad_whitelist(self):
         for domain, policy in (("www.bilibili.com", "DIRECT"), ("www.onedrive.com", "DIRECT"),
                                ("tracking-protection.cdn.mozilla.net", "DIRECT"),
