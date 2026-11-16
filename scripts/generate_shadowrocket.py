@@ -71,7 +71,7 @@ def generate():
         "# ACL4SSR Online Full — Shadowrocket 单节点版",
         "# 由 scripts/generate_shadowrocket.py 生成；策略在生成器中维护。",
         "# PROXY 使用首页当前选中的节点；全局路由请选择“配置”。",
-        "# 苹果/APNs/游戏走代理；SteamCN 保留直连；广告使用 REJECT。",
+        "# 苹果/APNs/游戏走代理；SteamCN / Xbox 下载保留直连；广告使用 REJECT。",
         "# APNs：还需在客户端 设置 > 隧道 中启用“包括 APNs”。",
         "# 若该选项不可选，请按当前版本界面先启用“包括所有网络”。",
         "# 含进程规则的列表内联为兼容快照；更新这些列表后请重新生成。",

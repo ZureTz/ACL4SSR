@@ -19,8 +19,8 @@
 | 策略 | 服务 |
 | --- | --- |
 | PROXY | 苹果服务、苹果 APNs、苹果智能、AI、Telegram、YouTube、Netflix、巴哈姆特、国外媒体、GFW 列表、未匹配流量 |
-| PROXY | Epic、Origin、Sony、Steam、Nintendo；原白名单内的 Epic / Origin 域名也通过代理放行 |
-| DIRECT | 中国大陆 iCloud（`icloud.com.cn` 及子域名）、SteamCN、GoogleCN、局域网、Tailscale 域名与网段、国内域名与 IP、下载规则 |
+| PROXY | Epic、Origin、Sony、Steam、Nintendo、Xbox 登录/联机；原白名单内的 Epic / Origin 域名也通过代理放行 |
+| DIRECT | 中国大陆 iCloud（`icloud.com.cn` 及子域名）、SteamCN、Xbox 下载、GoogleCN、局域网、Tailscale 域名与网段、国内域名与 IP、下载规则 |
 | DIRECT | 微软 Bing、OneDrive、微软服务、谷歌 FCM、网易音乐、哔哩哔哩、国内媒体 |
 | REJECT | 广告拦截、应用净化、秋风广告、anti-AD、EasyList、隐私防护 |
 
@@ -32,6 +32,8 @@
 4. 重新连接，在连接记录中确认苹果 / APNs / 游戏命中 `PROXY`、SteamCN 命中 `DIRECT`。已有模块可能覆盖本配置，排查时一并检查。
 
 `icloud.com.cn` 及其子域名在 `Clash/UnBan.list` 中优先直连，早于通用 Apple 规则；Online Full 的 Clash 订阅和此 Shadowrocket 配置均包含此例外。`icloud.com` 和其他苹果服务保持原分流。更新订阅/配置后新连接生效，旧配置不会自动改写。
+
+Online Full 将 `Xbox.list` 登录/联机域名归入“🎮 游戏平台”，包括 `notify.xboxlive.com`、`catalog.gamepass.com`、`xbox.ipv6.microsoft.com`。`XboxDownload.list` 中的 assets、packagespc、xvcf 下载端点和 Microsoft Store 下载域名优先直连，两份列表都位于通用微软规则之前；共享的 Microsoft 登录域名仍保留微软分流。Shadowrocket 中对应游戏 `PROXY`、下载 `DIRECT`。这只控制出口，不保证 CDN 位于大陆，也不重写 DNS。
 
 SteamCN 的直连范围沿用原列表，包括 `steamcontent.com`、`steamusercontent.com`、`steamserver.net` 等，并不只限于下载。其他 Steam 流量走代理；流媒体地区访问能力仍取决于节点出口。
 

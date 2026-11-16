@@ -1,0 +1,13 @@
+# 内容：Xbox / Microsoft Store 下载直连例外（放在 Xbox 和 Microsoft 规则之前）
+# 域名分流不保证 CDN IP 位于中国大陆，不修改 DNS 或下载地址。
+# 参考：https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Clash/Game/GameDownload/GameDownload.list
+# 参考：https://github.com/skydevil88/XboxDownload/issues/156
+# 参考：https://learn.microsoft.com/en-us/windows/privacy/manage-windows-11-endpoints
+DOMAIN,assets1.xboxlive.com
+DOMAIN,assets2.xboxlive.com
+DOMAIN,assets1.xboxlive.cn
+DOMAIN,assets2.xboxlive.cn
+DOMAIN,packagespc.xboxlive.com
+DOMAIN,xvcf1.xboxlive.com
+DOMAIN,xvcf2.xboxlive.com
+DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com
