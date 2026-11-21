@@ -80,6 +80,30 @@ class ShadowrocketConfigTests(unittest.TestCase):
             with self.subTest(domain=domain):
                 self.assertEqual(self.domain_policy(domain), policy)
 
+    def test_payment_developer_and_ai_routing(self):
+        # FINAL also uses PROXY. Check the explicit sources and their order.
+        def source_index(path, policy):
+            url = f"https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/{path}.list"
+            return self.rules.index(f"RULE-SET,{url},{policy}")
+
+        stripe = source_index("Ruleset/Stripe", "PROXY")
+        developer = source_index("Ruleset/Developer", "PROXY")
+        gfw = source_index("ProxyGFWlist", "PROXY")
+        self.assertLess(developer, gfw)
+        for name in ("AI", "OpenAi"):
+            ai = source_index(f"Ruleset/{name}", "PROXY")
+            self.assertLess(stripe, ai)
+            self.assertLess(ai, source_index("Bing", "DIRECT"))
+            self.assertLess(ai, source_index("Microsoft", "DIRECT"))
+
+        for domain in ("api.stripe.com", "js.stripecdn.com", "figma.com", "linear.app",
+                       "neon.com", "npmjs.com", "vercel.com", "sydney.bing.com",
+                       "ai.azure.com", "geminiweb-pa.clients6.google.com",
+                       "notebooklm-pa.googleapis.com", "grok.com", "clau.de"):
+            with self.subTest(domain=domain):
+                self.assertEqual(self.domain_policy(domain), "PROXY")
+        self.assertEqual(self.domain_policy("www.bing.com"), "DIRECT")
+
     def test_apns_ip_and_no_resolve(self):
         self.assertIn("bypass-system = false", self.content)
         for address in ("17.249.0.1", "2620:149:a44::1"):

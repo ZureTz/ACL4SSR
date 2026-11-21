@@ -20,6 +20,7 @@
 | --- | --- |
 | PROXY | 苹果服务、苹果 APNs、苹果智能、AI、Telegram、YouTube、Netflix、巴哈姆特、国外媒体、GFW 列表、未匹配流量 |
 | PROXY | Epic、Origin、Sony、Steam、Nintendo；原白名单内的 Epic / Origin 域名也通过代理放行 |
+| PROXY | Developer 开发服务、Stripe 支付服务。Clash Online Full 中两者跟随「🚀 节点选择」，Stripe 优先于 OpenAI 匹配 `stripe.com` |
 | DIRECT | 中国大陆 iCloud（`icloud.com.cn` 及子域名）、SteamCN、GoogleCN、局域网、Tailscale 域名与网段、国内域名与 IP、下载规则 |
 | DIRECT | 微软 Bing、OneDrive、微软服务、谷歌 FCM、网易音乐、哔哩哔哩、国内媒体 |
 | REJECT | 广告拦截、应用净化、秋风广告、anti-AD、EasyList、隐私防护 |
